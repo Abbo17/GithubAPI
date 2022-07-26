@@ -1,0 +1,28 @@
+{
+  "name": "githubapi",
+  "version": "1.0.0",
+  "description": "\"# GithubAPI\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"next",
+    "build":"next build",
+    "start":"next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abbo17/GithubAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abbo17/GithubAPI/issues"
+  },
+  "homepage": "https://github.com/Abbo17/GithubAPI#readme",
+  "dependencies": {
+    "next": "^12.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
