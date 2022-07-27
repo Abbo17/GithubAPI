@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Navbar from "../navbar/Navbar";
-
+import { wrapper } from "../../redux/store";
 /* FontAwesome Library */
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -36,4 +36,4 @@ const MainLayout = (props) => {
     );
 };
 
-export default MainLayout;
+export default wrapper.withRedux(MainLayout);
