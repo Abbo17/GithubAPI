@@ -1,8 +1,10 @@
 const theme = {
-    colors: {
-        background: "#202124",
-        text: "#fff",
+    color_background:"#24292f",
+    title:{
+        color:"white",
+        fontSize:"18px",
     },
+    get navbar_background_color() { return this.color_background },
 };
 
 export default theme;

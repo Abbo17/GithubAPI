@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
   *{
@@ -10,15 +10,9 @@ export default createGlobalStyle`
     height: 100%;
   }
   body {
-    color: ${props => props.theme.colors.text};
-    background: ${props => props.theme.colors.background};
-    font: 400 16px Josefin Sans, sans-serif;
     height: 100%;
-  }
-  h1 {
-    font: 100 64px Josefin Sans, sans-serif;
   }
   #__next {
   height: 100%;
   }
-`
+`;
