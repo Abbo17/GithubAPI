@@ -14,3 +14,9 @@ export const loadUsers = (data) => {
         data
     }
 }
+
+export const clearSearch = () => {
+    return {
+        type:actionTypes.USERS_CLEAR_SEARCH,
+    }
+}

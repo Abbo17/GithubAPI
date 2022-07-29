@@ -10,7 +10,10 @@ import * as Icons from "@fortawesome/free-solid-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
-import Head from "next/head";
+
+//Rsuite CSS
+import "rsuite/dist/rsuite.min.css";
+import Notification from "../Notification";
 
 const iconList = Object.keys(Icons)
     .filter((key) => key !== "fas" && key !== "prefix")
@@ -23,6 +26,10 @@ library.add(fab, far);
 const StyledMainLayout = styled.div`
     width: 100%;
     height: 100%;
+
+    .main-container {
+        height: calc(100% - 50px);
+    }
 `;
 const MainLayout = (props) => {
     const { children } = props;
@@ -30,8 +37,9 @@ const MainLayout = (props) => {
 
     return (
         <StyledMainLayout>
+            <Notification />
             <Navbar />
-            {children}
+            <div className="main-container">{children}</div>
         </StyledMainLayout>
     );
 };

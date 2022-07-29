@@ -12,6 +12,7 @@ function* watchFetchUsers(action) {
         let data = yield call(fetchUsers, action.data);
 
         if (data) {
+            data["page"] = action.data.page
             yield put(loadUsers(data));
         }
     } catch (err) {
