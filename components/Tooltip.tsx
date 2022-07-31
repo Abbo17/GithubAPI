@@ -1,5 +1,5 @@
 import React from "react";
-import { Tooltip, Whisper, Button } from "rsuite";
+import { Tooltip as TooltipRS, Whisper, Button } from "rsuite";
 
 interface PropsType {
     children: React.ReactNode;
@@ -23,7 +23,7 @@ const WhisperButton = React.forwardRef<any, PropsType>(
     }
 );
 
-const CustomComponent: React.FC<CustomComponentProps> = ({
+const Tooltip: React.FC<CustomComponentProps> = ({
     placement = "top",
     children,
     trigger = "hover",
@@ -33,10 +33,10 @@ const CustomComponent: React.FC<CustomComponentProps> = ({
         trigger={trigger}
         placement={placement}
         controlId={`control-id-${placement}`}
-        speaker={<Tooltip>{text}</Tooltip>}
+        speaker={<TooltipRS>{text}</TooltipRS>}
     >
         <WhisperButton>{children}</WhisperButton>
     </Whisper>
 );
 
-export default CustomComponent;
+export default Tooltip;

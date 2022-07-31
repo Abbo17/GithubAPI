@@ -4,7 +4,7 @@ import styled, { ThemeContext } from "styled-components";
 import { showNotification } from "../../redux/actions/global";
 import { fetchUserInfo } from "../../redux/actions/users";
 import { NOTIFICATIONS_TYPES } from "../../utils/constants";
-import FiedlLabel from "./FiedlLabel";
+import FieldLabel from "../../components/FieldLabel";
 
 const StyledUserDetail = styled.div`
     width: 100%;
@@ -123,22 +123,22 @@ const UserDetail = (props) => {
     }, [followers, following, repos]);
     return (
         <StyledUserDetail>
-            <FiedlLabel label={"Score"} value={score} />
-            <FiedlLabel
+            <FieldLabel label={"Score"} value={score} />
+            <FieldLabel
                 label={"Tipo"}
                 value={type == "User" ? "Usuario" : "Organización"}
             />
-            <FiedlLabel
+            <FieldLabel
                 label={"Seguidores"}
                 value={followers}
                 loading={fetchingFollowers}
             />
-            <FiedlLabel
+            <FieldLabel
                 label={"Siguiendo"}
                 value={following}
                 loading={fetchingFollowing}
             />
-            <FiedlLabel
+            <FieldLabel
                 label={"Repositorios"}
                 value={repos}
                 loading={fetchingRepos}

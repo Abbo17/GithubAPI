@@ -3,23 +3,24 @@ import { Loader } from "rsuite";
 import styled, { ThemeContext } from "styled-components";
 
 const StyledFieldLabel = styled.div`
-    width: 100%;
+    width: max-content;
     display: flex;
     justify-content: space-between;
     margin-block: 10px;
     .label-container {
         font-weight: bold;
+        margin-right: 10px;
     }
 
     .value-container {
         display: flex;
-        width: 40px;
+        min-width: 40px;
         align-items: center;
         justify-content: center;
     }
 `;
 
-const FiedlLabel = (props) => {
+const FieldLabel = (props) => {
     const { label, value = null, loading } = props;
 
     return (
@@ -36,4 +37,4 @@ const FiedlLabel = (props) => {
     );
 };
 
-export default FiedlLabel;
+export default FieldLabel;

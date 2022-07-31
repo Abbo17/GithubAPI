@@ -3,8 +3,13 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import styled, { ThemeContext } from "styled-components";
 import HeaderSearch from "../../components/header/HeaderSearch";
 import Icon from "../../components/icon/Icon";
+import MoreDataIcon from "../../components/MoreDataIcon";
 import ToolTip from "../../components/Tooltip";
-import { clearSearch, fetchUsers, setPerPageUsers } from "../../redux/actions/users";
+import {
+    clearSearch,
+    fetchUsers,
+    setPerPageUsers,
+} from "../../redux/actions/users";
 import User from "./User";
 
 const StyledUsers = styled.div`
@@ -34,7 +39,7 @@ const StyledBody = styled.div`
 `;
 
 const Users = () => {
-    const { list, page, total , perPage} = useSelector(
+    const { list, page, total, perPage } = useSelector(
         (state: any) => ({
             list: state.Users.list,
             page: state.Users.page,
@@ -79,14 +84,14 @@ const Users = () => {
     }
 
     const handleChangePerPage = (value) => {
-        dispatch(setPerPageUsers(value))
-    }
+        dispatch(setPerPageUsers(value));
+    };
 
     const themeContext = useContext(ThemeContext);
 
     return (
         <StyledUsers>
-            <HeaderSearch 
+            <HeaderSearch
                 title={"Usuarios"}
                 perPage={perPage}
                 onSearch={handleSearch}
@@ -98,16 +103,7 @@ const Users = () => {
                 ))}
             </StyledBody>
             {list?.length > 0 && list?.length < total && (
-                <StyledMoreData>
-                    <ToolTip text="Buscar la siguiente página">
-                        <Icon
-                            icon={["fas", "plus"]}
-                            fontSize="32px"
-                            color={themeContext.color_background}
-                            onClick={handleMoreData}
-                        />
-                    </ToolTip>
-                </StyledMoreData>
+                <MoreDataIcon onMoreData={handleMoreData} />
             )}
         </StyledUsers>
     );

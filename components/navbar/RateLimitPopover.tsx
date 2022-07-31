@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import FiedlLabel from "../../pages/users/FiedlLabel";
+import FieldLabel from "../FieldLabel";
 
 const StyledRateLimitPopover = styled.div`
     width: 100px;
@@ -67,14 +67,14 @@ const RateLimitPopover = () => {
 
     return (
         <StyledRateLimitPopover>
-            <FiedlLabel label={"Limite"} value={rate.limit} />
-            <FiedlLabel label={"Restante"} value={rate.remaining} />
-            <FiedlLabel label={"Usado"} value={rate.used} />
+            <FieldLabel label={"Limite"} value={rate.limit} />
+            <FieldLabel label={"Restante"} value={rate.remaining} />
+            <FieldLabel label={"Usado"} value={rate.used} />
             <hr />
             <span>Recursos de busqueda</span>
-            <FiedlLabel label={"Limite"} value={search.limit} />
-            <FiedlLabel label={"Restante"} value={search.remaining} />
-            <FiedlLabel label={"Usado"} value={search.used} />
+            <FieldLabel label={"Limite"} value={search.limit} />
+            <FieldLabel label={"Restante"} value={search.remaining} />
+            <FieldLabel label={"Usado"} value={search.used} />
         </StyledRateLimitPopover>
     );
 };
