@@ -69,7 +69,7 @@ const RateLimit = () => {
                     icon={["fas", "redo"]}
                     fontSize="16px"
                     color={"white"}
-                    style={{ marginInline: "5px" }}
+                    style={{ marginInline: "10px" }}
                     onClick={handleFetchRateLimit}
                 />
             </Tooltip>
@@ -81,7 +81,7 @@ const RateLimit = () => {
                     icon={["fas", "sync"]}
                     fontSize="16px"
                     color={reloadRateLimit ? themeContext.info_color : "white"}
-                    style={{ marginInline: "5px" }}
+                    style={{ marginInline: "10px" }}
                     onClick={handleSyncRateLimit}
                 />
             </Tooltip>
@@ -91,7 +91,7 @@ const RateLimit = () => {
                         icon={["fas", "server"]}
                         fontSize="16px"
                         color={isRateLimit ? themeContext.error_color : "white"}
-                        style={{ marginInline: "5px" }}
+                        style={{ marginInline: "10px" }}
                     />
                 }
             >

@@ -38,7 +38,13 @@ function* watchFetchUserInfo(action) {
         let data = yield call(genericFetch, action.data.url);
 
         if (data) {
-            console.log("Hola data", data);
+            yield put(
+                loadUserInfo({
+                    code: action.data.code,
+                    user: action.data.user,
+                    value: data?.length,
+                })
+            );
         }
     } catch (err) {
         yield put(

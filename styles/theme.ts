@@ -4,6 +4,7 @@ const theme = {
     title:{
         color:"white",
         fontSize:"24px",
+        fontWeight:"bold",
     },
     subtitle:{
         color:"#24292f",

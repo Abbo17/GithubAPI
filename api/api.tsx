@@ -9,7 +9,6 @@ export function genericFetch(url, method = "GET", headers = {}, body = undefined
         if (res.ok) {
             return data;
         } else {
-
             throw new Error(data.message);
         }
     });
