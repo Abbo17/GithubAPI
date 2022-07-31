@@ -14,7 +14,6 @@ function reducer(state = initialState, action) {
         case actionsTypes.USERS_LOAD:
             let newItems = [];
 
-            console.log("Hola aca", action.data);
             if (action.data.page == 1) {
                 newItems = action.data.items;
             } else {

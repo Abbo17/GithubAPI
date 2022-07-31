@@ -2,14 +2,16 @@ import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 import Icon from "../icon/Icon";
+import RateLimit from "./RateLimit";
 
 const StyledNavbar = styled.div`
     width: 100%;
     height: 50px;
     background-color: ${(props) => props.theme.navbar_background_color};
-    padding-inline: 40px;
+    padding-inline: 5%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 `;
 
 const StyledTitle = styled.div`
@@ -40,6 +42,7 @@ const Navbar = () => {
                 />
                 <span>Github API</span>
             </StyledTitle>
+            <RateLimit />
         </StyledNavbar>
     );
 };

@@ -1,3 +1,20 @@
+function genericFetch(url, method = "GET", headers = {}, body = undefined) {
+    let fetchParams = {
+        method: method,
+        headers: headers,
+        body: body,
+    };
+    return fetch(url, fetchParams).then(async (res) => {
+        let data = await res.json();
+        if (res.ok) {
+            return data;
+        } else {
+
+            throw new Error(data.message);
+        }
+    });
+}
+
 export function fetchUsers({ name, order, perPage, page }) {
     let API = `https://api.github.com/search/users`;
 
@@ -10,10 +27,5 @@ export function fetchUsers({ name, order, perPage, page }) {
         perPage +
         "&page=" +
         page;
-    return fetch(API + "?" + queryString)
-        .then((res) => res.json())
-        .then((data) => {
-            return data;
-        })
-        .catch((error) => console.error(error));
+    return genericFetch(API + "?" + queryString)
 }

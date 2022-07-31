@@ -65,7 +65,7 @@ const Users = () => {
     const [searchText, setSearchText] = useState("");
     const dispatch = useDispatch();
 
-    const PER_PAGE = 20;
+    const PER_PAGE = 100;
 
     useEffect(() => {
         if (searchText !== "") {
@@ -105,7 +105,7 @@ const Users = () => {
             <StyledTitle>
                 <span>Usuarios</span>
                 <div className="search-container">
-                    <Search text={searchText} onChange={handleSearch} />
+                    <Search onSearch={handleSearch} />
                 </div>
             </StyledTitle>
             <StyledBody>
