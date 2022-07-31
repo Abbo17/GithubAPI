@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import styled, { ThemeContext } from "styled-components";
+import HeaderSearch from "../../components/header/HeaderSearch";
 import Icon from "../../components/icon/Icon";
-import Search from "../../components/search/Search";
 import ToolTip from "../../components/Tooltip";
-import { clearSearch, fetchUsers } from "../../redux/actions/users";
+import { clearSearch, fetchUsers, setPerPageUsers } from "../../redux/actions/users";
 import User from "./User";
 
 const StyledUsers = styled.div`
@@ -15,27 +15,8 @@ const StyledUsers = styled.div`
     position: relative;
 `;
 
-const StyledTitle = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-block: 10px;
-    padding-block: 10px;
-    border-bottom: 1px solid ${(props) => props.theme.border_color};
-    span {
-        font-size: ${(props) => props.theme.subtitle.fontSize};
-        color: ${(props) => props.theme.subtitle.color};
-        font-weight: ${(props) => props.theme.subtitle.fontWeight};
-        cursor: pointer;
-    }
-    .search-container {
-        margin-inline: 10px;
-    }
-`;
-
 const StyledMoreData = styled.div`
-  //  position: absolute;
+    //  position: absolute;
     display: flex;
     width: 100%;
     justify-content: center;
@@ -53,10 +34,11 @@ const StyledBody = styled.div`
 `;
 
 const Users = () => {
-    const { list, page, total } = useSelector(
+    const { list, page, total , perPage} = useSelector(
         (state: any) => ({
             list: state.Users.list,
             page: state.Users.page,
+            perPage: state.Users.perPage,
             total: state.Users.total,
         }),
         shallowEqual
@@ -65,14 +47,12 @@ const Users = () => {
     const [searchText, setSearchText] = useState("");
     const dispatch = useDispatch();
 
-    const PER_PAGE = 1;
-    
     useEffect(() => {
         if (searchText !== "") {
             let data = {
                 name: searchText,
                 order: "desc",
-                perPage: PER_PAGE,
+                perPage: perPage,
                 page: page,
             };
             dispatch(fetchUsers(data));
@@ -91,23 +71,27 @@ const Users = () => {
             let data = {
                 name: searchText,
                 order: "desc",
-                perPage: PER_PAGE,
+                perPage: perPage,
                 page: page + 1,
             };
             dispatch(fetchUsers(data));
         }
     }
 
+    const handleChangePerPage = (value) => {
+        dispatch(setPerPageUsers(value))
+    }
+
     const themeContext = useContext(ThemeContext);
-    
+
     return (
         <StyledUsers>
-            <StyledTitle>
-                <span>Usuarios</span>
-                <div className="search-container">
-                    <Search onSearch={handleSearch} />
-                </div>
-            </StyledTitle>
+            <HeaderSearch 
+                title={"Usuarios"}
+                perPage={perPage}
+                onSearch={handleSearch}
+                onChangePerPage={handleChangePerPage}
+            />
             <StyledBody>
                 {list?.map((user, index) => (
                     <User data={user} key={"user-" + index} />

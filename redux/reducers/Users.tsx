@@ -3,6 +3,7 @@ import actionsTypes from "../actions/actionsTypes";
 const initialState = {
     list: [],
     page: 1,
+    perPage:20,
 };
 
 function reducer(state = initialState, action) {
@@ -40,6 +41,12 @@ function reducer(state = initialState, action) {
                 ...state,
                 list: newList,
             };
+
+        case actionsTypes.USERS_SET_PER_PAGE:
+            return {
+                ...state,
+                perPage: action.data
+            }
         default:
             return state;
     }

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import { fetchRateLimit } from "../../redux/actions/global";
 import Icon from "../icon/Icon";
 import Popover from "../Popover";
@@ -24,15 +24,41 @@ const RateLimit = () => {
         }),
         shallowEqual
     );
+    const [reloadRateLimit, setReloadRateLimit] = useState(false);
+    const intervalTimer: any = useRef();
 
     useEffect(() => {
-        dispatch(fetchRateLimit());
+        if (!intervalTimer.current && reloadRateLimit) {
+            setInterval(() => {
+                intervalTimer.current = dispatch(fetchRateLimit());
+            }, 2000);
+        }
+    }, [reloadRateLimit, intervalTimer, fetchRateLimit]);
+
+    useEffect(() => {
+        //Solo la primera vez si no esta activado el automatico
+        if (!reloadRateLimit) {
+            dispatch(fetchRateLimit());
+        }
     }, []);
 
     const handleFetchRateLimit = () => {
         dispatch(fetchRateLimit());
     };
 
+    const themeContext = useContext(ThemeContext);
+
+    const isRateLimit = rateLimit?.rate
+        ? rateLimit.rate.used == rateLimit.rate.limit ||
+          rateLimit.resources.search.used == rateLimit.resources.search.limit
+        : false;
+
+    const handleSyncRateLimit = () => {
+        if (isRateLimit){
+            clearInterval(intervalTimer)
+        }
+        setReloadRateLimit(!reloadRateLimit)
+    }
     return (
         <StyledRateLimit>
             <Tooltip
@@ -47,18 +73,29 @@ const RateLimit = () => {
                     onClick={handleFetchRateLimit}
                 />
             </Tooltip>
+            <Tooltip
+                text={"Actualizar los valores de latencia automaticamente"}
+                placement={"bottom"}
+            >
+                <Icon
+                    icon={["fas", "sync"]}
+                    fontSize="16px"
+                    color={reloadRateLimit ? themeContext.info_color : "white"}
+                    style={{ marginInline: "5px" }}
+                    onClick={handleSyncRateLimit}
+                />
+            </Tooltip>
             <Popover
                 button={
                     <Icon
                         icon={["fas", "server"]}
                         fontSize="16px"
-                        color={"white"}
+                        color={isRateLimit ? themeContext.error_color : "white"}
                         style={{ marginInline: "5px" }}
                     />
                 }
             >
-                <RateLimitPopover
-                 />
+                <RateLimitPopover />
             </Popover>
         </StyledRateLimit>
     );

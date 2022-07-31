@@ -34,3 +34,10 @@ export const loadUserInfo = (data) => {
         data
     }
 }
+
+export const setPerPageUsers = (data) => {
+    return {
+        type:actionTypes.USERS_SET_PER_PAGE,
+        data
+    }
+}
