@@ -7,7 +7,7 @@ const StyledFieldLabel = styled.div`
     display: flex;
     justify-content: space-between;
     margin-block: 10px;
-    .label-container{
+    .label-container {
         font-weight: bold;
     }
 
@@ -20,30 +20,17 @@ const StyledFieldLabel = styled.div`
 `;
 
 const FiedlLabel = (props) => {
-    const { label, value = null,  onFetch } = props;
-
-    const [parsedValue, setParsedValue] = useState(value ? value : null);
-
-    useEffect(() => {
-        if (onFetch) {
-            onFetch().then((data) => {
-                setParsedValue(data);
-            });
-        }
-    }, [onFetch, setParsedValue]);
-
-    useEffect(() => {
-        if (value !== null) {
-            setParsedValue(value)
-        }
-    }, [value]);
-
+    const { label, value = null, loading } = props;
 
     return (
         <StyledFieldLabel>
             <span className="label-container">{label}:</span>
             <div className="value-container">
-                {parsedValue !== null ? <span>{parsedValue}</span> : <Loader />}
+                {!loading ? (
+                    <span>{value == undefined ? "-" : value}</span>
+                ) : (
+                    <Loader />
+                )}
             </div>
         </StyledFieldLabel>
     );

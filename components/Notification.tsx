@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { Notification } from "rsuite";
 import styled, { ThemeContext } from "styled-components";
@@ -7,7 +7,7 @@ import { NOTIFICATIONS_TYPES } from "../utils/constants";
 import Icon from "./icon/Icon";
 
 const StyledNotification = styled.div`
-    width: 200px;
+    min-width: 200px;
     min-height: 40px;
     padding: 10px;
     border-radius: 5px;
@@ -28,7 +28,7 @@ const StyledNotification = styled.div`
         display: flex;
         align-items: center;
 
-        span{
+        span {
             margin-left: 10px;
         }
     }
@@ -73,11 +73,21 @@ const NotificationCustom = () => {
         shallowEqual
     );
 
+    const timeOut: any = useRef();
+    const dispatch = useDispatch();
+    const themeContext = useContext(ThemeContext);
+
+    useEffect(() => {
+        if (show && !timeOut.current) {
+            timeOut.current = setTimeout(() => {
+                dispatch(closeNotification());
+            }, 3000);
+        }
+    }, [show]);
+
     if (!show) return null;
 
-    const themeContext = useContext(ThemeContext);
-    const dispatch = useDispatch();
-
+    
     return (
         <StyledNotification>
             <div className="body-notification">

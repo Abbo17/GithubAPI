@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
-import { useDispatch } from "react-redux";
+import React, { useContext, useEffect, useState } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import styled, { ThemeContext } from "styled-components";
 import { showNotification } from "../../redux/actions/global";
+import { fetchUserInfo } from "../../redux/actions/users";
 import { NOTIFICATIONS_TYPES } from "../../utils/constants";
 import FiedlLabel from "./FiedlLabel";
 
@@ -39,43 +40,109 @@ Example of UserJSON
 */
 const UserDetail = (props) => {
     const { data } = props;
-
-    const { score, followers_url } = data;
+    const { rateLimit } = useSelector(
+        (state: any) => ({
+            rateLimit: state.Global.rateLimit,
+        }),
+        shallowEqual
+    );
+    const {
+        score,
+        type,
+        followers_url,
+        followers,
+        login,
+        following,
+        following_url,
+        repos_url,
+        repos,
+    } = data;
 
     const themeContext = useContext(ThemeContext);
     const dispatch = useDispatch();
 
-    const onFetchData = (url) => {
-        return fetch(url)
-            .then((res) => res.json())
-            .then((data) => {
-                return data;
-            })
-            .catch((error) => {
+    const { rate } = rateLimit;
+
+    const [fetchingFollowers, setFetchingFollowrs] = useState(false);
+    const [fetchingFollowing, setFetchingFollwing] = useState(false);
+    const [fetchingRepos, setFetchingRepos] = useState(false);
+
+    console.log("Hola follo", followers);
+
+    function fetchData() {
+        if (rate.used < rate.limit) {
+            if (followers == undefined) {
                 dispatch(
-                    showNotification({
-                        type: NOTIFICATIONS_TYPES.ERROR,
-                        text: error.message,
+                    fetchUserInfo({
+                        url: followers_url,
+                        code: "followers",
+                        user: login,
                     })
                 );
-            });
-    };
-
-    const handleFetchFollowers = () => {
-        /*
-        return onFetchData(followers_url).then((data) => {
-            if (data) {
-                return data?.length;
+                setFetchingFollowrs(true);
             }
-            return 0;
-        });
-        */
-    };
+            if (following == undefined) {
+                dispatch(
+                    fetchUserInfo({
+                        url: following_url,
+                        code: "following",
+                        user: login,
+                    })
+                );
+                setFetchingFollwing(true);
+            }
 
+            if (repos == undefined) {
+                dispatch(
+                    fetchUserInfo({
+                        url: repos_url,
+                        code: "repos",
+                        user: login,
+                    })
+                );
+                setFetchingRepos(true);
+            }
+        }
+    }
+    useEffect(() => {
+        fetchData();
+    }, [rate, followers, fetchData, fetchUserInfo, setFetchingFollowrs]);
+
+    useEffect(() => {
+        if (followers !== undefined && fetchingFollowers) {
+            setFetchingFollowrs(false);
+        }
+
+        if (following !== undefined && fetchingFollowing) {
+            setFetchingFollwing(false);
+        }
+
+        if (repos !== undefined && fetchingRepos) {
+            setFetchingRepos(false);
+        }
+    }, [followers, following, repos]);
     return (
         <StyledUserDetail>
             <FiedlLabel label={"Score"} value={score} />
-            {/*            <FiedlLabel label={"Seguidores"} onFetch={handleFetchFollowers} />*/}
+            <FiedlLabel
+                label={"Tipo"}
+                value={type == "User" ? "Usuario" : "Organización"}
+            />
+            <FiedlLabel
+                label={"Seguidores"}
+                value={followers}
+                loading={fetchingFollowers}
+            />
+            <FiedlLabel
+                label={"Siguiendo"}
+                value={following}
+                loading={fetchingFollowing}
+            />
+            <FiedlLabel
+                label={"Repositorios"}
+                value={repos}
+                loading={fetchingRepos}
+            />
         </StyledUserDetail>
     );
 };

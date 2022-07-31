@@ -20,3 +20,17 @@ export const clearSearch = () => {
         type:actionTypes.USERS_CLEAR_SEARCH,
     }
 }
+
+export const fetchUserInfo = (data) => {
+    return {
+        type:actionTypes.USER_FETCH_INFO,
+        data
+    }
+}
+
+export const loadUserInfo = (data) => {
+    return {
+        type:actionTypes.USER_LOAD_INFO,
+        data
+    }
+}

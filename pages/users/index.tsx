@@ -65,8 +65,8 @@ const Users = () => {
     const [searchText, setSearchText] = useState("");
     const dispatch = useDispatch();
 
-    const PER_PAGE = 100;
-
+    const PER_PAGE = 1;
+    
     useEffect(() => {
         if (searchText !== "") {
             let data = {

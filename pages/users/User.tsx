@@ -7,7 +7,7 @@ import UserHeader from "./UserHeader";
 
 const StyledUser = styled.div`
     width: 200px;
-    min-height: 400px;
+    height: min-content;
     border: 1px solid ${(props) => props.theme.border_color};
     border-radius: 5px;
 

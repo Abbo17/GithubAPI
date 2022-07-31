@@ -1,3 +1,4 @@
+import _ from "lodash";
 import actionsTypes from "../actions/actionsTypes";
 const initialState = {
     list: [],
@@ -29,6 +30,15 @@ function reducer(state = initialState, action) {
                 ...state,
                 list: null,
                 page: 1,
+            };
+        case actionsTypes.USER_LOAD_INFO:
+            let newList = _.cloneDeep(state.list)
+            let user = newList.find((user) => user.login == action.data.user)
+            user[action.data.code] = action.data.value
+
+            return {
+                ...state,
+                list: newList,
             };
         default:
             return state;
