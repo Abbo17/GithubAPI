@@ -1,4 +1,4 @@
-import { all, put, takeLatest, call } from "redux-saga/effects";
+import { all, put, takeLatest, call , takeEvery} from "redux-saga/effects";
 import { genericFetch } from "../../api/api";
 import { fetchUsers } from "../../api/users";
 import { NOTIFICATIONS_TYPES } from "../../utils/constants";
@@ -9,7 +9,7 @@ import { loadUserInfo, loadUsers } from "../actions/users";
 export default function* promotionsSaga() {
     yield all([yield takeLatest(actionsTypes.USERS_FETCH, watchFetchUsers)]);
     yield all([
-        yield takeLatest(actionsTypes.USER_FETCH_INFO, watchFetchUserInfo),
+        yield takeEvery(actionsTypes.USER_FETCH_INFO, watchFetchUserInfo),
     ]);
 }
 
@@ -22,7 +22,6 @@ function* watchFetchUsers(action) {
             yield put(loadUsers(data));
         }
     } catch (err) {
-
         yield put(
             showNotification({
                 type: NOTIFICATIONS_TYPES.ERROR,

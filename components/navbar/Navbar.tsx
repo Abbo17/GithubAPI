@@ -27,10 +27,9 @@ const StyledTitle = styled.div`
             color: ${(props) => props.theme.title.color};
             margin-left: 10px;
             cursor: pointer;
-        }
-
-        @media only screen and (max-width: 768px) {
-            font-size: ${(props) => props.theme.mobile.title.fontSize};
+            @media only screen and (max-width: 768px) {
+                font-size: ${(props) => props.theme.mobile.title.fontSize};
+            }
         }
     }
 `;

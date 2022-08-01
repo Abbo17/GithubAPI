@@ -28,8 +28,6 @@ const RepositoryInfo:React.FC<RepositoryInfoProps> = (props) => {
     const { data } = props;
 
 
-    const themeContext = useContext(ThemeContext);
-
     return (
         <StyledRepositoryInfo>
             <FieldLabel label={"Score"} value={data?.score} />
@@ -38,8 +36,8 @@ const RepositoryInfo:React.FC<RepositoryInfoProps> = (props) => {
                 <div className="topics">
                     <span className="topic-title">Topicos</span>
                     <div className="topic-body">
-                        {data?.topics.map((topic: string) => (
-                            <span>{topic}</span>
+                        {data?.topics.map((topic: string, index: number) => (
+                            <span key={index + "topic"}>{topic}</span>
                         ))}
                     </div>
                 </div>

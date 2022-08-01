@@ -54,11 +54,11 @@ const RateLimit = () => {
         : false;
 
     const handleSyncRateLimit = () => {
-        if (isRateLimit){
-            clearInterval(intervalTimer)
+        if (isRateLimit) {
+            clearInterval(intervalTimer);
         }
-        setReloadRateLimit(!reloadRateLimit)
-    }
+        setReloadRateLimit(!reloadRateLimit);
+    };
     return (
         <StyledRateLimit>
             <Tooltip
@@ -86,6 +86,7 @@ const RateLimit = () => {
                 />
             </Tooltip>
             <Popover
+                placement={"bottom"}
                 button={
                     <Icon
                         icon={["fas", "server"]}

@@ -2,8 +2,9 @@ import _ from "lodash";
 import actionsTypes from "../actions/actionsTypes";
 const initialState = {
     list: [],
+    usersInfo:{},
     page: 1,
-    perPage:20,
+    perPage:5,
 };
 
 function reducer(state = initialState, action) {
@@ -33,14 +34,16 @@ function reducer(state = initialState, action) {
                 page: 1,
             };
         case actionsTypes.USER_LOAD_INFO:
+            let newUsersInfo = {...state.usersInfo}
 
-            
-            let newList = _.cloneDeep(state.list)
-            let user = newList.find((user) => user.login == action.data.user)
-            user[action.data.code] = action.data.value
+            if (!newUsersInfo[action.data.user]){
+                newUsersInfo[action.data.user] = {}
+            }
+            newUsersInfo[action.data.user][action.data.code] = action.data.value
+
             return {
                 ...state,
-                list: newList,
+                usersInfo: newUsersInfo,
             };
 
         case actionsTypes.USERS_SET_PER_PAGE:

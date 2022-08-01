@@ -17,6 +17,7 @@ export function fetchUsers({
         perPage +
         "&page=" +
         page;
+
     return genericFetch(API + "?" + queryString);
 }
 

@@ -21,7 +21,6 @@ const StyledUsers = styled.div`
     position: relative;
 `;
 
-
 const StyledBody = styled.div`
     width: 100%;
     height: 80%;

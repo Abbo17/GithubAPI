@@ -13,10 +13,13 @@ const StyledRepositoryHeader = styled.div`
         flex-direction: column;
         gap: 15px;
         padding-bottom: 10px;
-        .title{
-            display:flex;
+        .title {
+            display: flex;
             width: 100%;
             justify-content: space-between;
+            @media only screen and (max-width: 768px) {
+                flex-direction: column;
+            }
         }
         .right-title {
             display: flex;
@@ -32,8 +35,6 @@ const StyledRepositoryHeader = styled.div`
         .description {
         }
         .repository-date-info {
-            
-            
         }
     }
 `;
@@ -54,7 +55,9 @@ const RepositoryHeader = (props) => {
             <div className="repository-title">
                 <div className="title">
                     <div className="right-title">
-                        <span onClick={handleOpenRepository}>{data?.full_name}</span>
+                        <span onClick={handleOpenRepository}>
+                            {data?.full_name}
+                        </span>
                         <Tooltip
                             text={
                                 data?.private
@@ -77,11 +80,15 @@ const RepositoryHeader = (props) => {
                         <div className="repository-date-info">
                             <FieldLabel
                                 label={"Creado"}
-                                value={moment(data?.created_at).format('MM/DD/YYYY')}
+                                value={moment(data?.created_at).format(
+                                    "MM/DD/YYYY"
+                                )}
                             />
-                             <FieldLabel
+                            <FieldLabel
                                 label={"Última actualización"}
-                                value={moment(data?.updated_at).format('MM/DD/YYYY')}
+                                value={moment(data?.updated_at).format(
+                                    "MM/DD/YYYY"
+                                )}
                             />
                         </div>
                     </div>
