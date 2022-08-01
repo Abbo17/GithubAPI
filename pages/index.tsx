@@ -82,7 +82,7 @@ const App = () => {
                 setLoadingPopularUsers(false);
                 console.error(error);
             });
-        /* fetchPopularRepositories()
+        fetchPopularRepositories()
             .then((data) => {
                 setLoadingPopularRepositories(false);
                 setPopularRepositories(data.items);
@@ -90,7 +90,7 @@ const App = () => {
             .catch((error) => {
                 setLoadingPopularRepositories(false);
                 console.error(error);
-            }); */
+            });
     }, []);
 
     return (
