@@ -17,31 +17,27 @@ const StyledRepositoryInfo = styled.div`
     }
 `;
 
-const RepositoryInfo = (props) => {
+
+interface RepositoryInfoProps {
+    data: any;
+}
+
+
+const RepositoryInfo:React.FC<RepositoryInfoProps> = (props) => {
     const { data } = props;
 
-    const {
-        language,
-        topics,
-        visibility,
-        score,
-        open_issues,
-        default_branch,
-    } = data;
 
     const themeContext = useContext(ThemeContext);
 
-    console.log("Topics ", topics.length);
-
     return (
         <StyledRepositoryInfo>
-            <FieldLabel label={"Score"} value={score} />
-            <FieldLabel label={"Lenguaje"} value={language} />
-            {topics.length > 0 && (
+            <FieldLabel label={"Score"} value={data?.score} />
+            <FieldLabel label={"Lenguaje"} value={data?.language} />
+            {data?.topics.length > 0 && (
                 <div className="topics">
                     <span className="topic-title">Topicos</span>
                     <div className="topic-body">
-                        {topics.map((topic) => (
+                        {data?.topics.map((topic: string) => (
                             <span>{topic}</span>
                         ))}
                     </div>
@@ -49,10 +45,10 @@ const RepositoryInfo = (props) => {
             )}
             <FieldLabel
                 label={"Visibilidad"}
-                value={visibility == "public" ? "Publica" : "Privada"}
+                value={data?.visibility == "public" ? "Publica" : "Privada"}
             />
-            <FieldLabel label={"Rama por defecto"} value={default_branch} />
-            <FieldLabel label={"Issues abiertos"} value={open_issues} />
+            <FieldLabel label={"Rama por defecto"} value={data?.default_branch} />
+            <FieldLabel label={"Issues abiertos"} value={data?.open_issues} />
         </StyledRepositoryInfo>
     );
 };

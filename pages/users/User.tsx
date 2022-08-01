@@ -44,10 +44,8 @@ const StyledUser = styled.div`
 const User = (props) => {
     const { data } = props;
 
-    const { login, avatar_url, html_url, score } = data;
-
     function handleOpenGithubUser() {
-        window.open(html_url, "_blank");
+        window.open(data?.html_url, "_blank");
     }
 
     const themeContext = useContext(ThemeContext);

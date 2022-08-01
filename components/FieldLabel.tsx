@@ -20,7 +20,13 @@ const StyledFieldLabel = styled.div`
     }
 `;
 
-const FieldLabel = (props) => {
+interface FieldLabelProps {
+    label: string;
+    value: any;
+    loading?: boolean;
+}
+
+const FieldLabel: React.FC<FieldLabelProps> = (props) => {
     const { label, value = null, loading } = props;
 
     return (

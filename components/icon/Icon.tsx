@@ -1,18 +1,26 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const StyledIcon = styled.div`
-     cursor: ${(props) => props.onClick ? "pointer" : ""};
+    cursor: ${(props) => (props.onClick ? "pointer" : "")};
 `;
 
-const Icon = (props) => {
-    const { fontSize, rotation, icon, color, onClick, style } = props;
+interface IconProps {
+    fontSize: string;
+    icon: any;
+    color: string;
+    onClick?: () => void;
+    style?: any;
+}
+
+const Icon: React.FC<IconProps> = (props) => {
+    const { fontSize, icon, color, onClick, style } = props;
     return (
         <StyledIcon
-        onClick={onClick}
+            onClick={onClick}
             style={{
-           
                 ...style,
             }}
         >
@@ -20,7 +28,6 @@ const Icon = (props) => {
                 icon={icon}
                 color={color}
                 fontSize={fontSize}
-                rotation={rotation || undefined}
                 onClick={onClick}
             />
         </StyledIcon>

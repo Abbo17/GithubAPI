@@ -41,39 +41,30 @@ const StyledRepositoryHeader = styled.div`
 const RepositoryHeader = (props) => {
     const { data } = props;
 
-    const {
-        name,
-        full_name,
-        description,
-        html_url,
-        created_at,
-        updated_at,
-    } = data;
-
     const themeContext = useContext(ThemeContext);
 
     function handleOpenRepository() {
-        window.open(html_url, "_blank");
+        window.open(data?.html_url, "_blank");
     }
 
-    const created_at_date = new Date(created_at);
-    console.log("created_at : ", created_at_date);
+    const created_at_date = new Date(data?.created_at);
+
     return (
         <StyledRepositoryHeader>
             <div className="repository-title">
                 <div className="title">
                     <div className="right-title">
-                        <span onClick={handleOpenRepository}>{full_name}</span>
+                        <span onClick={handleOpenRepository}>{data?.full_name}</span>
                         <Tooltip
                             text={
-                                data.private
+                                data?.private
                                     ? "El repositorio es privado"
                                     : "El repositorio es publico"
                             }
                         >
                             <Icon
                                 icon={
-                                    data.private
+                                    data?.private
                                         ? ["fas", "lock"]
                                         : ["fas", "lock-open"]
                                 }
@@ -86,16 +77,16 @@ const RepositoryHeader = (props) => {
                         <div className="repository-date-info">
                             <FieldLabel
                                 label={"Creado"}
-                                value={moment(created_at).format('MM/DD/YYYY')}
+                                value={moment(data?.created_at).format('MM/DD/YYYY')}
                             />
                              <FieldLabel
                                 label={"Última actualización"}
-                                value={moment(updated_at).format('MM/DD/YYYY')}
+                                value={moment(data?.updated_at).format('MM/DD/YYYY')}
                             />
                         </div>
                     </div>
                 </div>
-                <span className="description">{description}</span>
+                <span className="description">{data?.description}</span>
             </div>
         </StyledRepositoryHeader>
     );

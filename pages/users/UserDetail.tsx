@@ -46,17 +46,7 @@ const UserDetail = (props) => {
         }),
         shallowEqual
     );
-    const {
-        score,
-        type,
-        followers_url,
-        followers,
-        login,
-        following,
-        following_url,
-        repos_url,
-        repos,
-    } = data;
+
 
     const themeContext = useContext(ThemeContext);
     const dispatch = useDispatch();
@@ -67,37 +57,35 @@ const UserDetail = (props) => {
     const [fetchingFollowing, setFetchingFollwing] = useState(false);
     const [fetchingRepos, setFetchingRepos] = useState(false);
 
-    console.log("Hola follo", followers);
-
     function fetchData() {
         if (rate.used < rate.limit) {
-            if (followers == undefined) {
+            if (data?.followers == undefined) {
                 dispatch(
                     fetchUserInfo({
-                        url: followers_url,
+                        url: data?.followers_url,
                         code: "followers",
-                        user: login,
+                        user: data?.login,
                     })
                 );
                 setFetchingFollowrs(true);
             }
-            if (following == undefined) {
+            if (data?.following == undefined) {
                 dispatch(
                     fetchUserInfo({
-                        url: following_url,
+                        url: data?.following_url,
                         code: "following",
-                        user: login,
+                        user: data?.login,
                     })
                 );
                 setFetchingFollwing(true);
             }
 
-            if (repos == undefined) {
+            if (data?.repos == undefined) {
                 dispatch(
                     fetchUserInfo({
-                        url: repos_url,
+                        url: data?.repos_url,
                         code: "repos",
-                        user: login,
+                        user: data?.login,
                     })
                 );
                 setFetchingRepos(true);
@@ -106,41 +94,41 @@ const UserDetail = (props) => {
     }
     useEffect(() => {
         fetchData();
-    }, [rate, followers, fetchData, fetchUserInfo, setFetchingFollowrs]);
+    }, [rate, data?.followers, fetchData, fetchUserInfo, setFetchingFollowrs]);
 
     useEffect(() => {
-        if (followers !== undefined && fetchingFollowers) {
+        if (data?.followers !== undefined && fetchingFollowers) {
             setFetchingFollowrs(false);
         }
 
-        if (following !== undefined && fetchingFollowing) {
+        if (data?.following !== undefined && fetchingFollowing) {
             setFetchingFollwing(false);
         }
 
-        if (repos !== undefined && fetchingRepos) {
+        if (data?.repos !== undefined && fetchingRepos) {
             setFetchingRepos(false);
         }
-    }, [followers, following, repos]);
+    }, [data?.followers, data?.following, data?.repos]);
     return (
         <StyledUserDetail>
-            <FieldLabel label={"Score"} value={score} />
+            <FieldLabel label={"Score"} value={data?.score} />
             <FieldLabel
                 label={"Tipo"}
-                value={type == "User" ? "Usuario" : "Organización"}
+                value={data?.type == "User" ? "Usuario" : "Organización"}
             />
             <FieldLabel
                 label={"Seguidores"}
-                value={followers}
+                value={data?.followers}
                 loading={fetchingFollowers}
             />
             <FieldLabel
                 label={"Siguiendo"}
-                value={following}
+                value={data?.following}
                 loading={fetchingFollowing}
             />
             <FieldLabel
                 label={"Repositorios"}
-                value={repos}
+                value={data?.repos}
                 loading={fetchingRepos}
             />
         </StyledUserDetail>

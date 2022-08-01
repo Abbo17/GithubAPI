@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import React, { useContext } from "react";
 import { InputNumber } from "rsuite";
 import styled, { ThemeContext } from "styled-components";
 import Search from "../../components/search/Search";
-import { clearSearch, fetchUsers } from "../../redux/actions/users";
 
 const StyledHeaderSearch = styled.div`
     width: 100%;
@@ -27,7 +25,14 @@ const StyledHeaderSearch = styled.div`
     }
 `;
 
-const HeaderSearch = (props) => {
+interface HeaderSearchProps {
+    title: string;
+    perPage: string;
+    onSearch: any;
+    onChangePerPage: any;
+}
+
+const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     const { title, perPage, onSearch, onChangePerPage } = props;
 
     const themeContext = useContext(ThemeContext);

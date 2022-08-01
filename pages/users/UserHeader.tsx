@@ -32,20 +32,18 @@ const StyledUserHeader = styled.div`
 const UserHeader = (props) => {
     const { data } = props;
 
-    const { login, avatar_url, html_url, score } = data;
-
     function handleOpenGithubUser() {
-        window.open(html_url, "_blank");
+        window.open(data?.html_url, "_blank");
     }
 
     const themeContext = useContext(ThemeContext);
     return (
         <StyledUserHeader>
             <div className="avatar">
-                <Avatar src={avatar_url} size={"lg"} circle/>
+                <Avatar src={data?.avatar_url} size={"lg"} circle/>
             </div>
             <div className="user-title" onClick={handleOpenGithubUser}>
-                <span>{login}</span>
+                <span>{data?.login}</span>
                 <Icon
                     icon={["fab", "github"]}
                     fontSize="14px"

@@ -15,21 +15,18 @@ const StyledRepository = styled.div`
     box-sizing: content-box;
 `;
 
-const Repository = (props) => {
+interface RepositoryProps {
+    data: any;
+}
+
+const Repository : React.FC<RepositoryProps> = (props) => {
     const { data } = props;
 
-    const { login, avatar_url, html_url, score } = data;
-
-    function handleOpenGithubUser() {
-        window.open(html_url, "_blank");
-    }
-
-    const themeContext = useContext(ThemeContext);
     return (
         <StyledRepository>
             <RepositoryHeader data={data} />
             <RepositoryInfo data={data} />
-            <RepositoryOwner data={data.owner} />
+            <RepositoryOwner data={data?.owner} />
         </StyledRepository>
     );
 };

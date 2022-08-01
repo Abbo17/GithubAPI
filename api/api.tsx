@@ -1,4 +1,4 @@
-export function genericFetch(url, method = "GET", headers = {}, body = undefined) {
+export function genericFetch(url : string, method = "GET", headers = {}, body = undefined) {
     let fetchParams = {
         method: method,
         headers: headers,

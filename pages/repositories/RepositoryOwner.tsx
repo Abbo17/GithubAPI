@@ -25,21 +25,19 @@ const StyledRepositoryOwner = styled.div`
 const RepositoryOwner = (props) => {
     const { data } = props;
 
-    const { login, html_url, avatar_url } = data;
-
     const themeContext = useContext(ThemeContext);
 
     function handleOpenOwner() {
-        window.open(html_url, "_blank");
+        window.open(data?.html_url, "_blank");
     }
     return (
         <StyledRepositoryOwner>
             <div className="owner-title" onClick={handleOpenOwner}>
                 <span>Dueño:</span>
-                <span>{login}</span>
+                <span>{data?.login}</span>
             </div>
             <div className="owner-avatar">
-                <Avatar src={avatar_url} size={"lg"} />
+                <Avatar src={data?.avatar_url} size={"lg"} />
             </div>
         </StyledRepositoryOwner>
     );

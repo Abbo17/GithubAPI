@@ -99,8 +99,8 @@ const Repositories = () => {
                 onChangePerPage={handleChangePerPage}
             />
             <StyledBody>
-                {list?.map((user, index) => (
-                    <Repository data={user} key={"user-" + index} />
+                {list?.map((repository, index) => (
+                    <Repository data={repository} key={"user-" + index} />
                 ))}
             </StyledBody>
             {list?.length > 0 && list?.length < total && (
