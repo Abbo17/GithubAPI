@@ -28,6 +28,10 @@ const StyledTitle = styled.div`
             margin-left: 10px;
             cursor: pointer;
         }
+
+        @media only screen and (max-width: 768px) {
+            font-size: ${(props) => props.theme.mobile.title.fontSize};
+        }
     }
 `;
 const Navbar = () => {

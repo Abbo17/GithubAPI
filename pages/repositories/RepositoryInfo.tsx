@@ -13,6 +13,7 @@ const StyledRepositoryInfo = styled.div`
             margin-top: 10px;
             gap: 10px;
             display: flex;
+            flex-wrap: wrap;
         }
     }
 `;

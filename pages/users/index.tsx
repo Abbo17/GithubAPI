@@ -21,19 +21,13 @@ const StyledUsers = styled.div`
     position: relative;
 `;
 
-const StyledMoreData = styled.div`
-    //  position: absolute;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    bottom: 50px;
-`;
 
 const StyledBody = styled.div`
     width: 100%;
     height: 80%;
     padding: 40px;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     overflow: auto;
     gap: 20px;
@@ -96,8 +90,6 @@ const Users = () => {
     const handleChangePerPage = (value) => {
         dispatch(setPerPageUsers(value));
     };
-
-    const themeContext = useContext(ThemeContext);
 
     return (
         <StyledUsers>
