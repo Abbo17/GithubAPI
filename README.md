@@ -4,6 +4,7 @@
 Develop an application that uses the Github API for searching users and repositories and showing the results in a nice way. The application must have at least 2 routes: user search and repositories search with the corresponding navigation. These routes must have a search bar and the search results must appear on the same page.
 
 **Tecnologías/Librerías**
+
 **Next JS**
 
 Utilizaremos el framework de Next JS para realizar el proyecto. Existen dos formas de instalar Next.js una es utilizando el siguiente comando:
@@ -24,6 +25,7 @@ Utilizaremos la librería redux para el manejo de los estados en la aplicaciòn 
 https://es.redux.js.org/
 
 **Sagas**
+
 https://redux-saga.js.org/
 
 **Styled Components**
@@ -36,6 +38,7 @@ Utilizaremos la librería de fontawesome para los iconos:
 https://fontawesome.com/v5/docs/web/use-with/react
 
 **Rsuite**
+
 https://rsuitejs.com/
 Para facilitar la creación de los diferentes componentes utilizaremos la librerìa Rsuite que nos provee una gran cantidad de componentes reutilizables en React.
 
@@ -44,9 +47,11 @@ Para facilitar la creación de los diferentes componentes utilizaremos la librer
 Existirán por el momento tres grandes vistas, una para mostrar los repositorios de github, otra la de usuarios y una central donde mostraremos un dashboard.
 
 **Dashboard**
+
 En la primera vista mostraremos los usuarios y repositorios más populares, el usuario podrá navegar a través del header entre las diferentes secciones.
 
 **Repositorios de Github**
+
 En esta vista el usuario podrá realizar la búsqueda de repositorios mediante un input de tipo búsqueda y podrá setear la cantidad de elementos a buscar por pagina. Una vez que la búsqueda responda se renderiza la lista de repositorios mostrando alguno de sus atributos.
 
 **Usuarios**
