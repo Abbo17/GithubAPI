@@ -103,8 +103,8 @@ const UserDetail = (props) => {
                 loading={fetchingFollowers}
             />
             <FieldLabel
-                label={"Siguiendo"}
-                value={userInfo?.following}
+                label={"Organizaciones"}
+                value={userInfo?.orgs}
                 loading={fetchingOrgs}
             />
             <FieldLabel
