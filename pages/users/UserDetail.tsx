@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import styled, { ThemeContext } from "styled-components";
-import { showNotification } from "../../redux/actions/global";
 import { fetchUserInfo } from "../../redux/actions/users";
-import { NOTIFICATIONS_TYPES } from "../../utils/constants";
 import FieldLabel from "../../components/FieldLabel";
 
 const StyledUserDetail = styled.div`
@@ -24,8 +22,6 @@ const UserDetail = (props) => {
         }),
         shallowEqual
     );
-
-    const themeContext = useContext(ThemeContext);
     const dispatch = useDispatch();
 
     const { rate } = rateLimit;
@@ -34,9 +30,9 @@ const UserDetail = (props) => {
     const [fetchingOrgs, setFetchingOrgs] = useState(false);
     const [fetchingRepos, setFetchingRepos] = useState(false);
 
-    const userInfo = usersInfo?.[data.login]
+    const userInfo = usersInfo?.[data?.login]
     function fetchData() {
-        if (true) {
+        if (rate.used < rate.limit) {
             if (userInfo?.followers === undefined && !fetchingFollowers) {
                 dispatch(
                     fetchUserInfo({
@@ -89,6 +85,7 @@ const UserDetail = (props) => {
         }
     }, [usersInfo]);
 
+    if (!data) return null
 
     return (
         <StyledUserDetail>

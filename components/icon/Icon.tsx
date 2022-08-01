@@ -1,7 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const StyledIcon = styled.div`
     cursor: ${(props) => (props.onClick ? "pointer" : "")};

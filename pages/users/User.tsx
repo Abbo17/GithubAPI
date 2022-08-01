@@ -44,11 +44,7 @@ const StyledUser = styled.div`
 const User = (props) => {
     const { data } = props;
 
-    function handleOpenGithubUser() {
-        window.open(data?.html_url, "_blank");
-    }
-
-    const themeContext = useContext(ThemeContext);
+    if (!data) return null
     return (
         <StyledUser>
             <UserHeader 
