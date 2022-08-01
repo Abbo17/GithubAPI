@@ -19,7 +19,6 @@ const StyledApp = styled.div`
 
 const StyledAppUsers = styled.div`
     height: 100%;
-    width: 100%;
     display: flex;
     position: relative;
     flex-direction: column;
@@ -40,19 +39,19 @@ const StyledAppUsers = styled.div`
 
 const StyledAppRepositories = styled.div`
     height: 100%;
-    width: 100%;
     display: flex;
     position: relative;
     flex-direction: column;
+    box-sizing: content-box;
     margin-inline: 5%;
-    .users-title {
+    .repositories-title {
         margin-block: 20px;
         span {
             font-size: ${(props) => props.theme.title.fontSize};
             font-weight: ${(props) => props.theme.title.fontWeight};
         }
     }
-    .users-body {
+    .repositories-body {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
@@ -67,8 +66,6 @@ const App = () => {
         loadingPopularRepositories,
         setLoadingPopularRepositories,
     ] = useState(false);
-
-    const dispatch = useDispatch();
 
     useEffect(() => {
         setLoadingPopularUsers(true);
@@ -94,7 +91,7 @@ const App = () => {
     }, []);
 
     return (
-        <StyledAppUsers>
+        <StyledApp>
             <StyledAppUsers>
                 <div className="users-title">
                     <span>Usuarios Populares</span>
@@ -107,11 +104,11 @@ const App = () => {
                     )}
                 </div>
             </StyledAppUsers>
-            <StyledAppUsers>
-                <div className="users-title">
+            <StyledAppRepositories>
+                <div className="repositories-title">
                     <span>Repositorios Populares</span>
                 </div>
-                <div className="users-body">
+                <div className="repositories-body">
                     {loadingPopularRepositories ? (
                         <Loader size="lg" />
                     ) : (
@@ -120,8 +117,8 @@ const App = () => {
                         ))
                     )}
                 </div>
-            </StyledAppUsers>
-        </StyledAppUsers>
+            </StyledAppRepositories>
+        </StyledApp>
     );
 };
 

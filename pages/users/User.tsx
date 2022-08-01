@@ -29,30 +29,24 @@ const StyledUser = styled.div`
             margin-right: 3px;
         }
     }
-    .information-container{
+    .information-container {
         display: flex;
         justify-content: center;
         margin-top: 10px;
-        .information{
-            span:first-child{
+        .information {
+            span:first-child {
                 margin-right: 2px;
             }
         }
     }
 `;
 
-const User = (props) => {
-    const { data } = props;
-
-    if (!data) return null
+const User = ({ data }: { data: any }) => {
+    if (!data) return null;
     return (
         <StyledUser>
-            <UserHeader 
-                data={data}
-            />
-            <UserDetail 
-                data={data}
-            />
+            <UserHeader data={data} />
+            <UserDetail data={data} />
         </StyledUser>
     );
 };

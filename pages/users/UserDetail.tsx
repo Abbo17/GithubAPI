@@ -12,9 +12,7 @@ const StyledUserDetail = styled.div`
     background-color: ${(props) => props.theme.color_gris};
 `;
 
-const UserDetail = (props) => {
-    const { data } = props;
-
+const UserDetail = ({ data }: { data: any }) => {
     const { rateLimit, usersInfo } = useSelector(
         (state: any) => ({
             rateLimit: state.Global.rateLimit,
@@ -30,7 +28,7 @@ const UserDetail = (props) => {
     const [fetchingOrgs, setFetchingOrgs] = useState(false);
     const [fetchingRepos, setFetchingRepos] = useState(false);
 
-    const userInfo = usersInfo?.[data?.login]
+    const userInfo = usersInfo?.[data?.login];
     function fetchData() {
         if (rate.used < rate.limit) {
             if (userInfo?.followers === undefined && !fetchingFollowers) {
@@ -72,7 +70,6 @@ const UserDetail = (props) => {
 
     useEffect(() => {
         if (userInfo?.followers !== undefined) {
-    
             setFetchingFollowrs(false);
         }
 
@@ -85,7 +82,7 @@ const UserDetail = (props) => {
         }
     }, [usersInfo]);
 
-    if (!data) return null
+    if (!data) return null;
 
     return (
         <StyledUserDetail>
