@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Loader } from "rsuite";
 import styled from "styled-components";
 import { fetchPopularRepositories } from "../api/repositories";
 import { fetchPopularUsers } from "../api/users";
@@ -61,24 +62,37 @@ const App = () => {
     const [popularUsers, setPopularUsers] = useState([]);
     const [popularRepositories, setPopularRepositories] = useState([]);
 
+    const [loadingPopularUsers, setLoadingPopularUsers] = useState(false);
+    const [
+        loadingPopularRepositories,
+        setLoadingPopularRepositories,
+    ] = useState(false);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
+        setLoadingPopularUsers(true);
+        setLoadingPopularRepositories(true);
         fetchPopularUsers()
             .then((data) => {
+                setLoadingPopularUsers(false);
                 setPopularUsers(data.items);
             })
             .catch((error) => {
+                setLoadingPopularUsers(false);
                 console.error(error);
             });
-        fetchPopularRepositories()
+        /* fetchPopularRepositories()
             .then((data) => {
+                setLoadingPopularRepositories(false);
                 setPopularRepositories(data.items);
             })
             .catch((error) => {
+                setLoadingPopularRepositories(false);
                 console.error(error);
-            });
+            }); */
     }, []);
+
     return (
         <StyledAppUsers>
             <StyledAppUsers>
@@ -86,9 +100,11 @@ const App = () => {
                     <span>Usuarios Populares</span>
                 </div>
                 <div className="users-body">
-                    {popularUsers.map((user) => (
-                        <User data={user} />
-                    ))}
+                    {loadingPopularUsers ? (
+                        <Loader size={"lg"} />
+                    ) : (
+                        popularUsers.map((user) => <User data={user} />)
+                    )}
                 </div>
             </StyledAppUsers>
             <StyledAppUsers>
@@ -96,9 +112,13 @@ const App = () => {
                     <span>Repositorios Populares</span>
                 </div>
                 <div className="users-body">
-                    {popularRepositories.map((user) => (
-                        <Repository data={user} />
-                    ))}
+                    {loadingPopularRepositories ? (
+                        <Loader size="lg" />
+                    ) : (
+                        popularRepositories.map((user) => (
+                            <Repository data={user} />
+                        ))
+                    )}
                 </div>
             </StyledAppUsers>
         </StyledAppUsers>

@@ -23,6 +23,6 @@ export function fetchUsers({
 export function fetchPopularUsers() {
     let API = `https://api.github.com/search/users`;
 
-    const queryString = "q=repos:%3E42+followers:%3E1000&per_page=5";
+    const queryString = "q=repos:%3E42+followers:%3E1000&per_page=1";
     return genericFetch(API + "?" + queryString);
 }

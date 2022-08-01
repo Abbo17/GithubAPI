@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { Loader } from "rsuite";
 import styled, { ThemeContext } from "styled-components";
 import HeaderSearch from "../../components/header/HeaderSearch";
 import Icon from "../../components/icon/Icon";
@@ -50,6 +51,8 @@ const Users = () => {
     );
 
     const [searchText, setSearchText] = useState("");
+    const [loading, setLoading] = useState(false);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -60,12 +63,19 @@ const Users = () => {
                 perPage: perPage,
                 page: page,
             };
+            setLoading(true);
             dispatch(fetchUsers(data));
         } else {
             dispatch(clearSearch());
         }
         // return () => dispatch(clearSearch());
     }, [fetchUsers, searchText]);
+
+    useEffect(() => {
+        if (loading) {
+            setLoading(false);
+        }
+    }, [list]);
 
     function handleSearch(value) {
         setSearchText(value);
@@ -98,9 +108,13 @@ const Users = () => {
                 onChangePerPage={handleChangePerPage}
             />
             <StyledBody>
-                {list?.map((user, index) => (
-                    <User data={user} key={"user-" + index} />
-                ))}
+                {loading ? (
+                    <Loader size={"lg"} />
+                ) : (
+                    list?.map((user, index) => (
+                        <User data={user} key={"user-" + index} />
+                    ))
+                )}
             </StyledBody>
             {list?.length > 0 && list?.length < total && (
                 <MoreDataIcon onMoreData={handleMoreData} />

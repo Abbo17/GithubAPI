@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { Loader } from "rsuite";
 import styled, { ThemeContext } from "styled-components";
 import HeaderSearch from "../../components/header/HeaderSearch";
 import Icon from "../../components/icon/Icon";
@@ -21,19 +22,13 @@ const StyledRepositories = styled.div`
     position: relative;
 `;
 
-const StyledMoreData = styled.div`
-    //  position: absolute;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    bottom: 50px;
-`;
-
 const StyledBody = styled.div`
     width: 100%;
     height: 80%;
     padding: 40px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     overflow: auto;
     gap: 20px;
@@ -51,6 +46,7 @@ const Repositories = () => {
     );
 
     const [searchText, setSearchText] = useState("");
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -61,12 +57,19 @@ const Repositories = () => {
                 perPage: perPage,
                 page: page,
             };
+            setLoading(true);
             dispatch(fetchRepositories(data));
         } else {
             dispatch(clearSearch());
         }
         // return () => dispatch(clearSearch());
     }, [fetchUsers, searchText]);
+
+    useEffect(() => {
+        if (loading) {
+            setLoading(false);
+        }
+    }, [list]);
 
     function handleSearch(value) {
         setSearchText(value);
@@ -88,8 +91,6 @@ const Repositories = () => {
         dispatch(setPerPageUsers(value));
     };
 
-    const themeContext = useContext(ThemeContext);
-
     return (
         <StyledRepositories>
             <HeaderSearch
@@ -99,9 +100,13 @@ const Repositories = () => {
                 onChangePerPage={handleChangePerPage}
             />
             <StyledBody>
-                {list?.map((repository, index) => (
-                    <Repository data={repository} key={"user-" + index} />
-                ))}
+                {loading ? (
+                    <Loader size="lg" />
+                ) : (
+                    list?.map((repository, index) => (
+                        <Repository data={repository} key={"user-" + index} />
+                    ))
+                )}
             </StyledBody>
             {list?.length > 0 && list?.length < total && (
                 <MoreDataIcon onMoreData={handleMoreData} />
