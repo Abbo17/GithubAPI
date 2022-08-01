@@ -34,13 +34,10 @@ function reducer(state = initialState, action) {
             };
         case actionsTypes.USER_LOAD_INFO:
 
-            console.log("Hola action ", action.data)
             
             let newList = _.cloneDeep(state.list)
-            console.log("Hola newList ", newList)
             let user = newList.find((user) => user.login == action.data.user)
             user[action.data.code] = action.data.value
-            console.log("Hola user ", user)
             return {
                 ...state,
                 list: newList,

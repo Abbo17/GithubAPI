@@ -23,7 +23,6 @@ const UserDetail = (props) => {
         shallowEqual
     );
 
-
     const themeContext = useContext(ThemeContext);
     const dispatch = useDispatch();
 
@@ -33,7 +32,6 @@ const UserDetail = (props) => {
     const [fetchingFollowing, setFetchingFollwing] = useState(false);
     const [fetchingRepos, setFetchingRepos] = useState(false);
 
-    console.log("Hola followers ", data?.followers)
     function fetchData() {
         if (rate.used < rate.limit) {
             if (data?.followers == undefined) {
@@ -74,15 +72,15 @@ const UserDetail = (props) => {
     }, [rate, data?.followers, fetchData, fetchUserInfo, setFetchingFollowrs]);
 
     useEffect(() => {
-        if (data?.followers !== undefined && fetchingFollowers) {
+        if (data?.followers !== undefined) {
             setFetchingFollowrs(false);
         }
 
-        if (data?.following !== undefined && fetchingFollowing) {
+        if (data?.following !== undefined) {
             setFetchingFollwing(false);
         }
 
-        if (data?.repos !== undefined && fetchingRepos) {
+        if (data?.repos !== undefined) {
             setFetchingRepos(false);
         }
     }, [data?.followers, data?.following, data?.repos]);

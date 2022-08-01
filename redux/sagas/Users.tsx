@@ -22,7 +22,6 @@ function* watchFetchUsers(action) {
             yield put(loadUsers(data));
         }
     } catch (err) {
-        console.log("Hola err", err);
 
         yield put(
             showNotification({

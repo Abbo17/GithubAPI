@@ -37,7 +37,6 @@ const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
 
     const themeContext = useContext(ThemeContext);
 
-    console.log("Hola per ", perPage);
     return (
         <StyledHeaderSearch>
             <span>{title}</span>
